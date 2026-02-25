@@ -8,6 +8,46 @@ A Spring Boot REST API for user authentication with JWT tokens and PostgreSQL da
 - Maven 3.6+
 - PostgreSQL 12+
 
+## Quick Start
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd "login sign up API"
+```
+
+### 2. Set Up Configuration
+
+The `application.properties` file contains sensitive data (passwords, secrets) and is **not included in the repository**.
+
+**Create your own configuration:**
+
+```bash
+# Copy the example file
+cp src/main/resources/application.properties.example src/main/resources/application.properties
+```
+
+**Then edit `application.properties` and replace:**
+- `YOUR_POSTGRES_USERNAME` → Your PostgreSQL username (e.g., `postgres`)
+- `YOUR_POSTGRES_PASSWORD` → Your PostgreSQL password
+- `YOUR_BASE64_ENCODED_SECRET_HERE` → Generate with `openssl rand -base64 32`
+
+### 3. Create the Database
+
+Follow the pgAdmin 4 setup below, or run:
+```bash
+createdb authdb
+```
+
+### 4. Run the Application
+
+```bash
+./mvnw spring-boot:run
+```
+
+The API will be available at http://localhost:8080
+
 ## PostgreSQL Database Setup (Using pgAdmin 4)
 
 ### Step 1: Open pgAdmin 4
@@ -296,6 +336,7 @@ permission denied for table users
 
 ```
 login sign up API/
+├── .gitignore
 ├── pom.xml
 ├── README.md
 ├── src/main/
@@ -327,7 +368,8 @@ login sign up API/
 │   │   └── service/
 │   │       └── AuthService.java
 │   └── resources/
-│       ├── application.properties
+│       ├── application.properties           # Your local config (NOT in Git)
+│       ├── application.properties.example   # Template (in Git)
 │       └── db/migration/
 │           └── V1__create_users_table.sql
 ```
